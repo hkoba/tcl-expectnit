@@ -13,7 +13,9 @@ apply {{argList} {
             puts write:$args
         }]]
 
-    exp expect "%"
+    exp send "setopt no_zle no_prompt_cr; PROMPT='%# ' RPROMPT=''\n\n"
+
+    exp expect "% "
     
     parray [exp myvar my_expect_out]
 
