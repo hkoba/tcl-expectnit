@@ -6,9 +6,11 @@ source [file dirname [file dirname [info script]]]/expectnit.tcl
 apply {{argList} {
     expectnit exp
 
+    set varName expect_out
+
     exp spawn {*}$argList
     
-    trace add variable [exp myvar expect_out] write \
+    trace add variable [exp myvar $varName] write \
         [list apply [list args {
             puts write:$args
         }]]
@@ -17,7 +19,7 @@ apply {{argList} {
 
     exp expect "% "
     
-    parray [exp myvar my_expect_out]
+    parray [exp myvar $varName]
 
     exp send "pwd\n"
     
@@ -25,7 +27,7 @@ apply {{argList} {
     
     puts matched
 
-    parray [exp myvar my_expect_out]
+    parray [exp myvar $varName]
     
     puts END
 }} $::argv
