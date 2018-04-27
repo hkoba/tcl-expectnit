@@ -8,7 +8,7 @@ package require snit
 package require Expect
 
 snit::type expectnit {
-    variable my_expect_out   -array []
+    variable expect_out   -array []
     variable interact_out -array []
 
     variable spawn_id
@@ -32,7 +32,7 @@ snit::type expectnit {
 
     method expect args {
         puts "====Expect START===>>>"
-        upvar \#0 [myvar my_expect_out] expect_out
+        #upvar \#0 [myvar expect_out] expect_out
         
         if {[array exists expect_out]} {
             puts "parray before:"
