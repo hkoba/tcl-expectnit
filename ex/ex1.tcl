@@ -1,6 +1,10 @@
 #!/usr/bin/tclsh
 # -*- mode: tcl; tab-width: 4; coding: utf-8 -*-
 
+# Run this like following:
+# expect -d -f ./ex/ex1.tcl ssh localhost
+#
+
 source [file dirname [file dirname [info script]]]/expectnit.tcl
 
 apply {{argList} {
