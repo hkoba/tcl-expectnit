@@ -23,9 +23,9 @@ apply {{argList} {
     parray [exp myvar $varName]
 
     exp send "pwd\n"
-    exp expect -re {(\S+)\r?\n}; # echo back.
+    exp expect -re {(\S+)\r?\n}; # read echoback.
     
-    exp expect -re {(\S+)\r?\n}; # result
+    exp expect -re {(\S+)\r?\n}; # read pwd result.
     
     puts matched
 
