@@ -8,6 +8,8 @@ package require snit
 package require Expect
 
 snit::type expectnit {
+    option -debug 0
+    
     variable expect_out   -array []
     variable interact_out -array []
 
@@ -31,27 +33,18 @@ snit::type expectnit {
     method send args { ::exp_send {*}$args }
 
     method expect args {
-        puts "====Expect START===>>>"
-        #upvar \#0 [myvar expect_out] expect_out
+        $self dputs "====Expect START===>>>"
         
-        if {[array exists expect_out]} {
-            puts "parray before:"
-            parray expect_out        
-            puts "----"
-        }
-
         ::expect {*}$args
-        puts "parray after:"
-        parray expect_out        
 
-        set cmd [list namespace which expect_out]
-        puts $cmd=[{*}$cmd]
-        set cmd [list info locals expect_out]
-        puts $cmd=[{*}$cmd]
-
-        puts ">>>====Expect END==="
+        $self dputs ">>>====Expect END==="
     }
 
     method interact args { ::interact {*}$args }
+    
+    method dputs args {
+        if {!$options(-debug)} return
+        puts $args
+    }
 }
 
