@@ -26,6 +26,24 @@ snit::type expectnit {
     # variable send_slow []
     # variable send_human []
 
+    option -prompt {[^\n]*[\#\$] }
+
+    method wait-prompt {} {
+        $self expect -re $options(-prompt)
+    }
+
+    method call args {
+        $self send $args\n
+        $self expect -ex $args
+        $self expect -re {^\r?\n}
+        $self wait-result
+    }
+
+    method wait-result {} {
+        $self expect -re "^(.*?)\\r?\\n$options(-prompt)"
+        set expect_out(1,string)
+    }
+
     method myvar varName {myvar $varName}
 
     method spawn args { ::spawn {*}$args }
